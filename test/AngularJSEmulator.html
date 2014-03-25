@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app="ajsEmulator">
+<head>
+    <script data-require="angular.js@1.0.x" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js" data-semver="1.0.8"></script>
+    <script src="js/emulatorMain.js"></script>
+    <title>AngularJS Emulator</title>
+</head>
+<body>
+
+<center>
+<div ng-controller="urlCtrl">
+        <h1>AngularJS Emulator</h1>
+        <label>URL:</label>
+        <input type="text" size="70" ng-model="gameUrl" placeholder="Game Url">
+        <input type="text" size="70" ng-model="noOfPlayers" placeholder="No Of Players">
+        <input type="button" ng-click="setUrl(gameUrl,noOfPlayers)" value="Fetch">
+</div>
+
+</center>
+<div id="frames" ng-controller="listenerCtrl">
+    <input type="button" ng-click="test()" value="Send Message">
+<center>
+    <textarea rows="5" cols="80" id="console" readonly></textarea><br/>
+</center>
+
+</div>
+
+</body>
+</html>
