@@ -15,7 +15,7 @@ var faqUrl = "http://3.smg-server.appspot.com/faqs";
 var uploadfaqUrl = "http://3.smg-server.appspot.com/uploadfaqs";
 var uploadChangeUrl = "http://3.smg-server.appspot.com/uploadChangeLog";
 var bugReportUrl = "http://3.smg-server.appspot.com/bugReport";
-var gameListUrl = "http://3.smg-server.appspot.com/gameList";
+var gameListURL = "http://3.smg-server.appspot.com/gameList";
 var playerStats = "http://3.smg-server.appspot.com/playerStats";
 var networkStats = "http://3.smg-server.appspot.com/networkStats";
 var usageStats = "http://3.smg-server.appspot.com/usageStats";
@@ -50,18 +50,12 @@ var move = " ";
 //Test the View FAQ feature
 ServerV2Test.prototype.testViewFAQs = function() {
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", faqUrl, true);
-	xhr.onreadystatechange = function(){
-		var status;
-		var resp;
-		if(xhr.readyState == 4){
-			status = xhr.status;
-			if (status == 200){
-				resp = xhr.response;
-				assert(JSON.parse(resp)===faqs);
-			} 
-		}
-	};
+	xhr.open("GET", faqUrl);
+	xhr.send();
+    var status = xhr.status;
+	assert(status === 200, "Http Response was not 200");
+    var resp = xhr.response;
+	assert(JSON.parse(resp)===faqs);
 };
 
 //Test the Upload FAQ feature.
@@ -69,17 +63,11 @@ ServerV2Test.prototype.testUploadFAQs = function() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", uploadfaqUrl, true);
 	xhr.send(JSON.stringify(faqs));
-	xhr.onreadystatechange = function(){
-		var status;
-		var resp;
-		if(xhr.readyState == 4){
-			status = xhr.status;
-			if (status == 200){
-				resp = xhr.response;
-				assert(resp==="Uploaded Successfully","Error in uploading FAQs");
-			}
-		}
-	};
+	var status = xhr.status;
+    assert(status == 200, "Http response was not 200")
+	var resp = xhr.response;
+	assert(resp==="Uploaded Successfully","Error in uploading FAQs");
+
 };
 
 //Test the Upload ChangeLog feature.
@@ -87,103 +75,62 @@ ServerV2Test.prototype.testUploadChangeLog = function() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", uploadChangeUrl, true);
 	xhr.send(JSON.stringify(change));
-	xhr.onreadystatechange = function(){
-		var status;
-		var resp;
-		if(xhr.readyState == 4){
-			status = xhr.status;
-			if (status == 200){
-				resp = xhr.response;
-				assert(resp==="Uploaded Successfully","Error in uploading change logs");
-			}
-		}
-	};
+	var status = xhr.status;
+	assert(status == 200, "Http response was not 200")
+	var resp = xhr.response;
+	assert(resp==="Uploaded Successfully","Error in uploading change logs");
 };
 
 //Test the View Bug Report feature.
 ServerV2Test.prototype.testViewBugReport = function() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", bugReportUrl, true);
-	xhr.onreadystatechange = function(){
-		var status;
-		var resp;
-		if(xhr.readyState == 4){
-			status = xhr.status;
-			if (status == 200){
-				resp = xhr.response;
-				assert(resp==="Error","Error in loading the bug report");
-			}
-		}
-	};
+	var status = xhr.status;
+    assert(status == 200, "Http response not 200")
+	var resp = xhr.response;
+	assert(resp==="Error","Error in loading the bug report");
 };
 
 //Test the get player statistics function.
 ServerV2Test.prototype.testGetStatistics = function() {
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", playerStats, true);
-	xhr.onreadystatechange = function(){
-		var status;
-		var resp;
-		if(xhr.readyState == 4){
-			status = xhr.status;
-			if (status == 200){
-				resp = xhr.response;
-				assert(JSON.parse(resp).hasOwnProperty("StatCount"),"Error in getting player stats");
-			}
-		}
-	};
+	xhr.open("GET", playerStats);
+    var status = xhr.status;
+    assert(status == 200,"Http response not 200")
+    var resp = xhr.response;
+	assert(JSON.parse(resp).hasOwnProperty("StatCount"),"Error in getting player stats");
 };
 
 //Test the get network statistics function.
 ServerV2Test.prototype.testGetNetworkStatistics = function() {
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", networkStats, true);
-	xhr.onreadystatechange = function(){
-		var status;
-		var resp;
-		if(xhr.readyState == 4){
-			status = xhr.status;
-			if (status == 200){
-				resp = xhr.response;
-				assert(JSON.parse(resp).hasOwnProperty("StatCount"),"Error in getting network stats");
-			}
-		}
-	};
+	xhr.open("GET", networkStats);
+	var status = xhr.status
+    assert(status == 200)
+	var resp = xhr.response;
+	assert(JSON.parse(resp).hasOwnProperty("StatCount"),"Error in getting network stats");
 };
 
 //Test the get player statistics function.
 ServerV2Test.prototype.testGetUsageStatistics = function() {
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET",usageStats , true);
-	xhr.onreadystatechange = function(){
-		var status;
-		var resp;
-		if(xhr.readyState == 4){
-			status = xhr.status;
-			if (status == 200){
-				resp = xhr.response;
-				assert(JSON.parse(resp).hasOwnProperty("StatCount"),"Error in getting player stats");
-			}
-		}
-	};
+	xhr.open("GET",usageStats);
+    var status = xhr.status
+    assert(status == 200)
+    resp = xhr.response;
+	assert(JSON.parse(resp).hasOwnProperty("StatCount"),"Error in getting player stats");
 };
 
 //Test the get Opponent information function.
 ServerV2Test.prototype.testGetOpponentInfo = function() {
 	var xhr = new XMLHttpRequest();
+    var opponentDetails = "";
 	xhr.open("POST",opponentDetails, true);
 	xhr.send(JSON.stringify(player));
-	xhr.onreadystatechange = function(){
-		var status;
-		var resp;
-		if(xhr.readyState == 4){
-			status = xhr.status;
-			if (status == 200){
-				resp = xhr.response;
-				assert(JSON.parse(resp)===opponent);
-			}
-		}
-	};
+    var status = xhr.status
+    assert(status == 200)
+    var resp = xhr.response;
+	assert(JSON.parse(resp)===opponent);
 };
 
 //Test the getListofgames function for the viewer.
@@ -191,17 +138,10 @@ ServerV2Test.prototype.testGetListOfGames = function() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST",gameListURL, true);
 	xhr.send(JSON.stringify(viewer));
-	xhr.onreadystatechange = function(){
-		var status;
-		var resp;
-		if(xhr.readyState == 4){
-			status = xhr.status;
-			if (status == 200){
-				resp = xhr.response;
-				assert(JSON.parse(resp).hasOwnProperty(gameCount), "Error in fetching the list of games" );
-			}
-		}
-	};
+    var status = xhr.status
+    assert(status == 200)
+    var resp = xhr.response;
+	assert(JSON.parse(resp).hasOwnProperty(gameCount), "Error in fetching the list of games" );
 };
 
 //Test whether the player played his move in time
@@ -218,12 +158,11 @@ ServerV2Test.prototype.testMoveInTime = function() {
 		var resp;
 		if(xhr.readyState == 4){
 			status = xhr.status;
-			if (status == 200){
-				resp = xhr.response;
-				assert(resp=="TimeOut", "Move not made in time" );
-			}
-		}
-	};
+            assert(status === 200);
+			resp = xhr.response;
+			assert(resp==="TimeOut", "Move not made in time" );
+        }
+    }
 };
 
 

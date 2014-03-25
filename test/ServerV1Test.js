@@ -1,5 +1,5 @@
 /**
- *  Created by Shwetank on 3/11/14.
+ *  Created by Shwetank and Sushindhran on 3/11/14.
  **/
 ServerV1Test = TestCase("Server version 1 tests")
 
@@ -17,7 +17,7 @@ function assert(condition, message) {
     if (!condition) {
         throw message || "Assertion failed";
     }
-}
+};
 
 var TestConstants = {
     email : "testuser@gmail.com",
@@ -25,45 +25,45 @@ var TestConstants = {
     password : "testPassword",
     firstName : "FirstName",
     lastName : "LastName"
-}
+};
 
 var createPlayer = function(parameters) {
     // Set up default parameters
-    var param1 = "email="+TestConstants.email
-    var param2 = "password="+TestConstants.password
-    var param3 = "firstName="+TestConstants.firstName
-    var param4 = "lastName="+TestConstants.lastName
-    var params = param1+"&"+param2+"&"+param3+"&"+param4
-    params = encodeURIComponent(params)
+    var param1 = "email="+TestConstants.email;
+    var param2 = "password="+TestConstants.password;
+    var param3 = "firstName="+TestConstants.firstName;
+    var param4 = "lastName="+TestConstants.lastName;
+    var params = param1+"&"+param2+"&"+param3+"&"+param4;
+    params = encodeURIComponent(params);
 
     // If user gave his own params use them else default
-    parameters = parameters || params
+    parameters = parameters || params;
 
-    var req = new XMLHttpRequest ()
-    req.open("POST", ServerConstants.serverUrl+ServerConstants.playerPath)
+    var req = new XMLHttpRequest ();
+    req.open("POST", ServerConstants.serverUrl+ServerConstants.playerPath);
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     req.setRequestHeader("Content-length", params.length);
     req.setRequestHeader("Connection", "close");
 
-    req.send(parameters)
-    return req
-}
+    req.send(parameters);
+    return req;
+};
 
 var deletePlayer = function(playerId, accessSignature) {
-    var req = new XMLHttpRequest ()
-    req.open("DELETE", ServerConstants.serverUrl+ServerConstants.playerPath+'/'+playerId+"?accessSignature="+accessSignature)
+    var req = new XMLHttpRequest ();
+    req.open("DELETE", ServerConstants.serverUrl+ServerConstants.playerPath+'/'+playerId+"?accessSignature="+accessSignature);
     req.setRequestHeader("Connection", "close");
-    req.send()
-    return req
-}
+    req.send();
+    return req;
+};
 
 var login = function(playerId,password) {
-    var req = new XMLHttpRequest()
-    req.open("GET", ServerConstants.serverUrl+ServerConstants.playerPath+'/'+playerId+"?password="+password)
-    req.setRequestHeader("Connection","close")
-    req.send(null)
-    return req
-}
+    var req = new XMLHttpRequest();
+    req.open("GET", ServerConstants.serverUrl+ServerConstants.playerPath+'/'+playerId+"?password="+password);
+    req.setRequestHeader("Connection","close");
+    req.send(null);
+    return req;
+};
 
 var getPlayerInfo = function(playerId, accessSignature) {
     var req = new XMLHttpRequest()
@@ -306,7 +306,7 @@ ServerV1Test.prototype.testWrongAccessSignature = function () {
     assert(json.hasOwnProperty("error"))
 
     // Cleanup
-    deletePlayer(playerId,accessSignature)
+    deletePlayer(playerId,accessSignature);
 }
 
 /*
