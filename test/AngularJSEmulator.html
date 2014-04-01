@@ -11,19 +11,18 @@
 <div ng-controller="urlCtrl">
         <h1>AngularJS Emulator</h1>
         <label>URL:</label>
-        <input type="text" size="70" ng-model="gameUrl" placeholder="Game Url">
-        <input type="text" size="70" ng-model="noOfPlayers" placeholder="No Of Players">
-        <input type="button" ng-click="setUrl(gameUrl,noOfPlayers)" value="Fetch">
+        <input type="text" size="70" ng-model="gameUrl" placeholder="Game Url"><br>
+        <label>No of Players</label>
+        <input type="text" size="5" ng-model="noOfPlayers"><br/>
+        <input type="button" ng-click="setUrl(gameUrl,noOfPlayers)" value="Fetch"><br/>
+         <textarea  rows="20" cols="80" id="console" readonly></textarea><br/>
 </div>
 
-</center>
-<div id="frames" ng-controller="listenerCtrl">
-    <input type="button" ng-click="test()" value="Send Message">
-<center>
-    <textarea rows="5" cols="80" id="console" readonly></textarea><br/>
-</center>
 
+<div  ng-controller="listenerCtrl">
+<div align="left" id="frames"></div>
 </div>
+</center>
 
 </body>
 </html>
