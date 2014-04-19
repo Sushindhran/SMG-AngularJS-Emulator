@@ -1,3 +1,9 @@
+URL for the AngularJS Game Emulator
+===================================
+
+http://4-dot-smg-angularjs-emulator.appspot.com/
+
+
 Directions on how to run the test.
 
 1. Check out the code
