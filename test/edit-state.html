@@ -1,0 +1,13 @@
+<form>
+    <div class="table">
+        <span class="row" ng-controller="stateCtrl">
+            <label>Current State</label><br>
+            <textarea id="currentState" ng-model="updateUIMessage" rows="20" cols="30"/><br>
+            <input type="button" value="EditState" ng-click="sendEditState()"/>
+        </span>
+        <span class="button-bar">
+                <input type="button" value="Close" ng-click="closeEditState($event)"/>
+        </span>
+    </div>
+
+</form>
